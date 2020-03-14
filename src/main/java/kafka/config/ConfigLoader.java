@@ -17,6 +17,8 @@ public class ConfigLoader {
 	private static ConfigLoader instance = null;
 	private static Properties config = null;
 
+	private static final String CONFLUENT_CLOUD_CLUSTER_SETTINGS = "java.config";
+
 	private ConfigLoader() {
 
 	}
@@ -33,7 +35,8 @@ public class ConfigLoader {
 		if (config != null)
 			return config;
 
-		String configFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\kafka\\cluster\\config.properties";
+		String configFilePath = System.getProperty("user.home") + System.getProperty("file.separator") + ".confluent"
+				+ System.getProperty("file.separator") + CONFLUENT_CLOUD_CLUSTER_SETTINGS;
 
 		if (!Files.exists(Paths.get(configFilePath)))
 			throw new IOException(configFilePath + "not found.");
