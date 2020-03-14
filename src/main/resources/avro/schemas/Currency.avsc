@@ -1,0 +1,27 @@
+{
+  "fields": [
+    {
+      "doc": "System ID",
+      "name": "Sid",
+      "type": "string"
+    },
+    {
+      "doc": "Currency Key",
+      "name": "CurrencyKey",
+      "type": "string"
+    },
+    {
+      "doc": "ISO currency code",
+      "name": "IsoCurrencyCode",
+      "type": "string"
+    },
+    {
+      "doc": "Date until which the currency is valid (in milliseconds)",
+      "name": "ValidUntil",
+      "type": "long"
+    }
+  ],
+  "name": "Currency",
+  "namespace": "model.core",
+  "type": "record"
+}
