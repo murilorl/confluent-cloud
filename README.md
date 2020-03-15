@@ -27,7 +27,7 @@ In this example, the producer writes Kafka data to a topic (`currency`) in Confl
 ## Example 2: Currency Avro consumer!
 
 ### Prerequisites
-* A topic called currency with a schema Avro that matches the one on /src/main/resources/avro/schemas/Currency.avsc	
+* A topic called `currency` with a schema Avro that matches the one on /src/main/resources/avro/schemas/Currency.avsc	
 
 1. Run the consumer?
  
@@ -39,4 +39,34 @@ In this example, the producer writes Kafka data to a topic (`currency`) in Confl
 	$ mvn exec:java -Dexec.mainClass="clients.consumers.avro.CurrencyConsumerAvro"
 	```	
 	
-Note: it take's some iterations for the consumer to start receiving records from the cluster. Initial polls return nothing .	
+Note: it take's some iterations for the consumer to start receiving records from the cluster. Initial polls return nothing.
+
+
+## Example 3: Currency Avro stream!
+This Kafka Streams application will process new messages published to topic `currency` keeping only the ones that contains 'a' or 'e' (case insensitive) in the field `CurrencyKey`. The filtered messages will be published to topic called `filtered_currency`.
+
+### Prerequisites
+* A topic called `currency` with a schema Avro that matches the one on /src/main/resources/avro/schemas/Currency.avsc	
+* A topic called `filtered_currency` with a schema Avro that matches the one on /src/main/resources/avro/schemas/Currency.avsc
+
+1. Run the stream app?
+ 
+	```shell
+	# Compile the Java code
+	$ mvn clean package
+	
+	# Run the producer
+	$ mvn exec:java -Dexec.mainClass="clients.consumers.avro.CurrencyAvroStream"
+	```	
+	
+You should see log lines in the console similar to the ones below:
+
+	```shell
+	...
+	[Currency with 'a' or 'e' in the key]: null, {"Sid": "wTK", "CurrencyKey": "zXa", "IsoCurrencyCode": "7850", "ValidUntil": 1584310163686}
+	[Currency with 'a' or 'e' in the key]: null, {"Sid": "MGt", "CurrencyKey": "daH", "IsoCurrencyCode": "9733", "ValidUntil": 1584310166671}
+	[Currency with 'a' or 'e' in the key]: null, {"Sid": "JYK", "CurrencyKey": "nAp", "IsoCurrencyCode": "6936", "ValidUntil": 1584310166682}
+	[Currency with 'a' or 'e' in the key]: null, {"Sid": "Pfc", "CurrencyKey": "OAk", "IsoCurrencyCode": "6435", "ValidUntil": 1584310166687}
+	```	
+	
+When you are done, press `<ctrl>-c`.
