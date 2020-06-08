@@ -24,6 +24,22 @@ In this example, the producer writes Kafka data to a topic (`currency`) in Confl
 	$ mvn exec:java -Dexec.mainClass="clients.producers.avro.CurrencyProducerAvro"
 	```	
 	
+## Example 1b: Material producer!
+In this example, the producer will generate *n* material objects and write them to a topic (`material`) in Confluent Cloud.
+
+### Prerequisites
+* A topic called `material`
+
+1. Run the producer? 
+
+	```shell
+	# Run the producer. Arguments:
+		0 - Number of messages
+		1 - System Id
+		2 - System Name
+	$ mvn exec:java -Dexec.mainClass="clients.producers.MaterialProducer" -Dexec.args="1 F2P CARS"
+	```		
+	
 ## Example 2: Currency Avro consumer!
 
 ### Prerequisites
