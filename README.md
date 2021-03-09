@@ -86,3 +86,23 @@ You should see log lines in the console similar to the ones below:
 	```	
 	
 When you are done, press `<ctrl>-c`.
+
+## Example 4: Generic producer!
+This producer will publish to Kafka, whatever key and message provided as execution arguments.
+
+### Prerequisites
+* A topic that matches the value for argument `--topic`
+
+1. Run the producer? 
+
+	```shell
+	# Compile the Java code
+	$ mvn clean package	
+	
+	# Run the producer. Arguments:
+		--topic The name of the topic
+		--key The key of the message
+		--value The value of message
+
+	$ mvn exec:java -Dexec.mainClass=clients.producers.GenericProducer -Dexec.args="--topic mrl-test --key EUP8920463447 --value json.record"
+	```		
