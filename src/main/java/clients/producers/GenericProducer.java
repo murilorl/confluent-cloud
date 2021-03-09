@@ -21,24 +21,28 @@ public class GenericProducer {
 
 	Logger logger = Logger.getLogger(GenericProducer.class);
 
-	@Parameter(names = { "--topic", "-t" })
+	@Parameter(names = { "--topic", "-t" }, required = true)
 	private String topic;
 
-	@Parameter(names = { "--key", "-k" })
+	@Parameter(names = { "--key", "-k" }, required = true)
 	private String key;
 
-	@Parameter(names = { "--value", "-v" })
+	@Parameter(names = { "--value", "-v" }, required = true)
 	private String value;
 
 	public static void main(String... args) throws IOException {
 		GenericProducer producer = new GenericProducer();
-		JCommander.newBuilder().addObject(producer).build().parse(args);
+		JCommander.newBuilder()
+				.addObject(producer)
+				.build()
+				.parse(args);
 		producer.run();
 
 	}
 
 	private void run() throws IOException {
-		final Properties props = ConfigLoader.getInstance().loadConfig();
+		final Properties props = ConfigLoader.getInstance()
+				.loadConfig();
 
 		// Add additional properties.
 		props.put(ProducerConfig.ACKS_CONFIG, "all");

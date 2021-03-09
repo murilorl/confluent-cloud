@@ -197,6 +197,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
+				 <version>3.1.2</version>
 				<executions>
 					<!-- This declaration merges with the one in the parent, rather than overriding it, so we need to disable the "validate" 
 						phase execution that the parent declares and declare our own during "test-compile". One reason for this is that avro codegen 
@@ -222,7 +223,7 @@
 							<includeResources>false</includeResources>
 							<includeTestResources>false</includeTestResources>
 							<includeTestSourceDirectory>true</includeTestSourceDirectory>
-							<excludes>io/confluent/examples/clients/cloud/**</excludes>
+							<excludes>clients/**</excludes>
 							<configLocation>checkstyle.xml</configLocation>
 						</configuration>
 						<goals>
